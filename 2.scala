@@ -7,10 +7,10 @@ import java.nio.charset.CodingErrorAction
 
 object WordCloud{
     def main(args: Array[String]) = {
-        val decoder = Codec.UTF8.decoder.onMalformedInput(CodingErrorAction.IGNORE)
-        val lines = Source.fromFile("01-The-Fellowship-Of-The-Ring.txt")(decoder).getLines().toList        
-        val stop_words = Source.fromFile("Stop_words.txt")(decoder).getLines().toList 
-        print(stop_words.contains("the")) 
+        val dec = Codec.UTF8.decoder.onMalformedInput(CodingErrorAction.IGNORE)
+        val lines = Source.fromFile("01-The-Fellowship-Of-The-Ring.txt")(dec).getLines().toList        
+        val stop_words = Source.fromFile("Stop_words.txt")(dec).getLines().toList 
+        print("START\n") 
         var words =Array[String]()
 
         for(line<-lines){
@@ -33,9 +33,6 @@ object WordCloud{
         }
         val sorted_seq = word_count.toSeq.sortWith(_._2>_._2)
         print(sorted_seq.take(50))
-
-        
-            
-
+   
     }
 }
