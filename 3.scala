@@ -6,7 +6,7 @@ import java.nio.charset.CodingErrorAction
 class WordCloudGenerator(var filename: String){
     val decoder = Codec.UTF8.decoder.onMalformedInput(CodingErrorAction.IGNORE)
     val lines = Source.fromFile(filename)(decoder).getLines().toList        
-    val stop_words = Source.fromFile("Stop_words_.txt")(decoder).getLines().toList 
+    val stop_words = Source.fromFile("Stop_words.txt")(decoder).getLines().toList 
     var words =Array[String]()
     for(line<-lines){
             val split = line.toLowerCase().replaceAll("\\p{Punct}", "").replaceAll("“","").split(' ')
