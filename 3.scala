@@ -42,7 +42,7 @@ class WordCloudGenerator(var filename: String){
     }
 }
 
-object WordCloudGeneratorProgram{
+object WordCloudProgram{
     def main(args: Array[String]) = {
         
         println("Word Cloud Generator")
