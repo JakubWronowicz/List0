@@ -4,9 +4,9 @@ import java.nio.charset.CodingErrorAction
 
 
 class WordCloudGenerator(var filename: String){
-    val decoder = Codec.UTF8.decoder.onMalformedInput(CodingErrorAction.IGNORE)
-    val lines = Source.fromFile(filename)(decoder).getLines().toList        
-    val stop_words = Source.fromFile("Stop_words.txt")(decoder).getLines().toList 
+    val dec = Codec.UTF8.decoder.onMalformedInput(CodingErrorAction.IGNORE)
+    val lines = Source.fromFile(filename)(dec).getLines().toList        
+    val stop_words = Source.fromFile("Stop_words.txt")(dec).getLines().toList 
     var words =Array[String]()
     for(line<-lines){
             val split = line.toLowerCase().replaceAll("\\p{Punct}", "").replaceAll("“","").split(' ')
@@ -49,17 +49,17 @@ object WordCloudGeneratorProgram{
         var running = true
         while(running)
         {
-            val menu_input = io.StdIn.readLine("SELECT OPTION (1 - load file    other key - exit):  ")
-            if(menu_input == "1"){
+            val menu_input = io.StdIn.readLine("SELECT OPTION (a - load file    other key - exit):  ")
+            if(menu_input == "a"){
                 val file_input = io.StdIn.readLine("ENTER FILENAME:  ")
                 val word_cloud_generator = new WordCloudGenerator(file_input)
                 var generator_running = true
                 while(generator_running){
-                    val generator_menu_input = io.StdIn.readLine("SELECT OPTION (1 - print word cloud   2 - save word cloud     other key - exit):   ")
-                    if(generator_menu_input == "1"){
+                    val generator_menu_input = io.StdIn.readLine("SELECT OPTION (a - print word cloud   b - save word cloud     other key - exit):   ")
+                    if(generator_menu_input == "a"){
                         val number_of_words_input = io.StdIn.readLine("ENTER NUMBER OF WORDS:   ")
                         word_cloud_generator.print_word_cloud(number_of_words_input.toInt)
-                    }else if (generator_menu_input == "2"){
+                    }else if (generator_menu_input == "b"){
                         val number_of_words_input = io.StdIn.readLine("ENTER NUMBER OF WORDS:   ")
                         val output_filename_input = io.StdIn.readLine("ENTER OUTPUT FILENAME:   ")
                         word_cloud_generator.save_word_cloud(number_of_words_input.toInt,output_filename_input)
@@ -70,9 +70,6 @@ object WordCloudGeneratorProgram{
             }else{
                 running = false
             }
-
-        }
-            
-
+        }            
     }
 }
